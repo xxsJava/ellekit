@@ -44,7 +44,7 @@ build-ios:
 deb-ios-rootful: ARCHITECTURE = iphoneos-arm
 deb-ios-rootful: INSTALL_PREFIX = 
 
-deb-ios-rootless: ARCHITECTURE = iphoneos-arm64
+deb-ios-rootless: ARCHITECTURE = iphoneos-arm64e
 deb-ios-rootless: INSTALL_PREFIX = /var/jb
 
 deb-ios-rootful deb-ios-rootless: build-ios
