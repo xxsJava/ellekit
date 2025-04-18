@@ -90,7 +90,7 @@ deb-ios-rootful deb-ios-rootless: build-ios
 
 	@mkdir -p $(INSTALL_ROOT)/Library/Frameworks/CydiaSubstrate.framework
 	@ln -s ${INSTALL_PREFIX}/usr/lib/libellekit.dylib $(INSTALL_ROOT)/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate
-	@mkdir -p $(INSTALL_ROOT)/Library/MobileSubstrate
+	@mkdir -p $(INSTALL_ROOT)/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729
 	@ln -s ${INSTALL_PREFIX}/usr/lib/TweakInject $(INSTALL_ROOT)/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729/AI-155D000B-3232-7A8E-BFB2-07BEF118D7A6
 
 	@mkdir -p $(INSTALL_ROOT)/usr/share/doc/ellekit
@@ -109,44 +109,5 @@ deb-ios-rootful deb-ios-rootless: build-ios
 	@rm -rf work-$(ARCHITECTURE)
 
 deb-ios: deb-ios-rootful deb-ios-rootless
-
-deb-macos: ARCHITECTURE = macos
-deb-macos: build-macos
-	@rm -rf work-$(ARCHITECTURE)
-	@mkdir -p $(STAGE_DIR)
-
-	@# Because BSD install does not support -D
-	@mkdir -p $(INSTALL_ROOT)/Library/TweakInject
-	@mkdir -p $(INSTALL_ROOT)/Library/Frameworks
-	@mkdir -p $(INSTALL_ROOT)/usr/local/bin
-	@mkdir -p $(INSTALL_ROOT)/usr/local/lib
-
-	@install -m644 $(PRODUCTS_DIR)/libellekit.dylib $(INSTALL_ROOT)/Library/TweakInject/ellekit.dylib
-	@install -m644 $(PRODUCTS_DIR)/pspawn.dylib $(INSTALL_ROOT)/Library/TweakInject/pspawn.dylib
-	@install -m755 $(PRODUCTS_DIR)/loader $(INSTALL_ROOT)/usr/local/bin/loader
-
-	@find $(INSTALL_ROOT)/Library/TweakInject -type f -exec ldid -S {} \;
-	@find $(INSTALL_ROOT)/usr/local/ -type f -exec ldid -S {} \;
-
-	@ln -s $(INSTALL_PREFIX)/Library/TweakInject/ellekit.dylib $(INSTALL_ROOT)/usr/local/lib/libsubstrate.dylib
-	@ln -s $(INSTALL_PREFIX)/Library/TweakInject/ellekit.dylib $(INSTALL_ROOT)/Library/Frameworks/libsubstrate.dylib
-	@ln -s $(INSTALL_PREFIX)/Library/TweakInject/ellekit.dylib $(INSTALL_ROOT)/Library/Frameworks/ellekit.dylib
-
-	@mkdir -p $(INSTALL_ROOT)/usr/local/share/doc/ellekit
-	@install -m644 LICENSE $(INSTALL_ROOT)/usr/local/share/doc/ellekit/LICENSE
-	
-	@mkdir -p packages
-	@tar -czvf packages/ellekit_$(DEB_VERSION)_$(ARCHITECTURE).tar.gz -C ./$(STAGE_DIR) .
-	@rm -rf work-$(ARCHITECTURE)
-
-ifneq ($(MAC),)
-deb: deb-macos
-else
 deb: deb-ios
-endif
-
-ifneq ($(MAC),)
-build: build-macos
-else
 build: build-ios
-endif
