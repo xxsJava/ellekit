@@ -16,17 +16,9 @@ CONFIGURATION = Debug
 DEB_VERSION = $(VERSION)+debug
 endif
 
-ifneq ($(MAC),)
-COMMON_OPTIONS += -destination 'generic/platform=macOS'
-else
 COMMON_OPTIONS += -destination 'generic/platform=iOS'
-endif
 
-ifneq ($(MAC),)
-PRODUCTS_DIR = build/$(CONFIGURATION)
-else
 PRODUCTS_DIR = build/$(CONFIGURATION)-iphoneos
-endif
 
 STAGE_DIR = work-$(ARCHITECTURE)/stage
 INSTALL_ROOT = $(STAGE_DIR)/$(INSTALL_PREFIX)
@@ -48,11 +40,6 @@ build-ios:
 	xcodebuild -scheme launchd $(COMMON_OPTIONS)
 	xcodebuild -scheme loader $(COMMON_OPTIONS)
 	xcodebuild -scheme safemode-ui $(COMMON_OPTIONS)
-
-build-macos:
-	xcodebuild -scheme ellekit $(COMMON_OPTIONS)
-	xcodebuild -scheme launchd $(COMMON_OPTIONS)
-	xcodebuild -scheme loader $(COMMON_OPTIONS)
 
 deb-ios-rootful: ARCHITECTURE = iphoneos-arm
 deb-ios-rootful: INSTALL_PREFIX = 
