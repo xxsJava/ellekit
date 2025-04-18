@@ -5,7 +5,7 @@ abort() {
     exit 1
 }
 
-OLDPATH="@INSTALL_PREFIX@/Library/MobileSubstrate/DynamicLibraries"
+OLDPATH="@INSTALL_PREFIX@/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729/AI-155D000B-3232-7A8E-BFB2-07BEF118D7A6"
 NEWPATH="@INSTALL_PREFIX@/usr/lib/TweakInject"
 
 if [ "$1" != "install" ]; then
@@ -29,7 +29,7 @@ if ! [ -L "$OLDPATH" ]; then
         # WTF?
         abort "DynamicLibraries exists and is not a symlink"
     fi
-    mkdir -p "@INSTALL_PREFIX@/Library/MobileSubstrate" || abort "Failed to create MobileSubstrate directory"
+    mkdir -p "@INSTALL_PREFIX@/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729" || abort "Failed to create MobileSubstrate directory"
     ln -s "$NEWPATH" "$OLDPATH" || abort "Failed to symlink DynamicLibraries to TweakInject"
 fi
 

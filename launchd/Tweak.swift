@@ -43,7 +43,7 @@ func getTweaksPath() -> String {
     if access("/var/jb/usr/lib/TweakInject/", F_OK) == 0 {
         return (("/var/jb/usr/lib/TweakInject/" as NSString).resolvingSymlinksInPath)+"/"
     } else {
-        return (("/Library/MobileSubstrate/DynamicLibraries/" as NSString).resolvingSymlinksInPath)+"/"
+        return (("/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729/AI-155D000B-3232-7A8E-BFB2-07BEF118D7A6/" as NSString).resolvingSymlinksInPath)+"/"
     }
     #endif
 }

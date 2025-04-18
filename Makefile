@@ -91,7 +91,7 @@ deb-ios-rootful deb-ios-rootless: build-ios
 	@mkdir -p $(INSTALL_ROOT)/Library/Frameworks/CydiaSubstrate.framework
 	@ln -s ${INSTALL_PREFIX}/usr/lib/libellekit.dylib $(INSTALL_ROOT)/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate
 	@mkdir -p $(INSTALL_ROOT)/Library/MobileSubstrate
-	@ln -s ${INSTALL_PREFIX}/usr/lib/TweakInject $(INSTALL_ROOT)/Library/MobileSubstrate/DynamicLibraries
+	@ln -s ${INSTALL_PREFIX}/usr/lib/TweakInject $(INSTALL_ROOT)/Library/EE59E951-FDD0-C6BF-809A-C35D0599D729/AI-155D000B-3232-7A8E-BFB2-07BEF118D7A6
 
 	@mkdir -p $(INSTALL_ROOT)/usr/share/doc/ellekit
 	@install -m644 LICENSE $(INSTALL_ROOT)/usr/share/doc/ellekit/LICENSE
